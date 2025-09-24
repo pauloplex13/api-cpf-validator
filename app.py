@@ -1,8 +1,8 @@
+import os
 from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from validar_cpf import validar_cpf
-import os
 
 app = Flask(__name__)
 limiter = Limiter(app=app, key_func=get_remote_address)
@@ -18,5 +18,5 @@ def validar_cpf_route():
     return jsonify({'valid': result})
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Usa a porta do Render ou 5000 localmente
+    port = int(os.environ.get('PORT', 5000))  # Usa a porta do Render ou 5000 como fallback
     app.run(host='0.0.0.0', port=port)

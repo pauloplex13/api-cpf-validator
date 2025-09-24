@@ -7,13 +7,14 @@ from validar_cpf import validar_cpf
 app = Flask(__name__)
 limiter = Limiter(app=app, key_func=get_remote_address)
 
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({'message': 'API de validação de CPF - Use /validar-cpf com POST'}), 200
+@app.route('/validar-cpf/<cpf>', methods=['GET'])  # Rota GET com CPF no caminho
+def validar_cpf_route(cpf):
+    result = validar_cpf(cpf)
+    return jsonify({'valid': result})
 
-@app.route('/validar-cpf', methods=['POST'])
+@app.route('/validar-cpf', methods=['POST'])  # Rota POST original
 @limiter.limit("100 per day")
-def validar_cpf_route():
+def validar_cpf_route_post():
     data = request.get_json()
     cpf = data.get('cpf')
     if not cpf:

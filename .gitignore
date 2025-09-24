@@ -1,0 +1,8 @@
+# Ignorar arquivos do sistema e temporários
+__pycache__/
+*.pyc
+venv/
+*.log
+*.tmp
+*.db
+bool

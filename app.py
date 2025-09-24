@@ -2,12 +2,13 @@ from flask import Flask, request, jsonify
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from validar_cpf import validar_cpf
+import os
 
 app = Flask(__name__)
 limiter = Limiter(app=app, key_func=get_remote_address)
 
 @app.route('/validar-cpf', methods=['POST'])
-@limiter.limit("100 per day")  # Limite de requisições
+@limiter.limit("100 per day")
 def validar_cpf_route():
     data = request.get_json()
     cpf = data.get('cpf')
@@ -17,4 +18,5 @@ def validar_cpf_route():
     return jsonify({'valid': result})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Usa a porta do Render ou 5000 localmente
+    app.run(host='0.0.0.0', port=port)

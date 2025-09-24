@@ -4,7 +4,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from validar_cpf import validar_cpf
 
-app = Flask(__name__)  # Nome exato: 'app'
+app = Flask(__name__)
 limiter = Limiter(app=app, key_func=get_remote_address)
 
 @app.route('/validar-cpf', methods=['POST'])
@@ -18,5 +18,5 @@ def validar_cpf_route():
     return jsonify({'valid': result})
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get('PORT', 5000))  # Usa PORT do Render (ex: 10000)
+    app.run(host='0.0.0.0', port=port)  # Bind em 0.0.0.0 para Render

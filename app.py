@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import psycopg2
+import psycopg
 import requests
 from dotenv import load_dotenv
 import os
@@ -18,7 +18,7 @@ def get_db_connection():
     if not DATABASE_URL:
         return None
     try:
-        conn = psycopg2.connect(DATABASE_URL)
+        conn = psycopg.connect(DATABASE_URL)
         return conn
     except Exception as e:
         print(f"Erro ao conectar ao Postgres: {e}")

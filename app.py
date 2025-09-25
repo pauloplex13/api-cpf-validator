@@ -107,4 +107,5 @@ def create_table():
 
 if __name__ == '__main__':
     create_table()
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 3000))
+    port = int(os.environ.get('PORT', 3000))  # Usa $PORT no Render, 3000 localmente
+    app.run(host='0.0.0.0', port=port, debug=True)  # debug=True apenas localmente

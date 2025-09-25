@@ -107,4 +107,4 @@ def create_table():
 
 if __name__ == '__main__':
     create_table()
-    app.run(debug=True, host='0.0.0.0', port=3000)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 3000))
